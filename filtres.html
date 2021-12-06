@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;600;700;800;900&display=swap"  rel="stylesheet" />
+    <title>Document</title>
+    <style>
+        body{
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        #display {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 20px;
+            padding: 50px;
+        }
+
+        .item {
+            width: 25%;
+            padding: 20px;
+            box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+            text-align: center;
+        }
+
+        img {
+
+        }
+    </style>
+</head>
+<body>
+    <h1>Afficher la liste des items</h1>
+    <div id="display">
+        <select id = "myList" onchange = "favTutorial()" >  
+            <option> Sujets</option>  
+            <option> w3schools </option>  
+            <option> Javatpoint </option>  
+        </select>  
+    </div>
+    
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <script>
+
+         var select= document.getElementById("myList");
+         var option = document.createElement('option');
+         option.text = "salam";
+         select.add(option);
+
+         function showSujets() {
+                var items="";
+                var tab=[];
+                
+                console.log(tab.includes(2))
+                var url = "https://polemika.univ-paris8.fr/omk/api/items?item_set_id=2";
+                d3.json(url, function (data) {
+                    for(index in data) {
+                        //console.log(data);
+                        if(data[index]["@type"]=="o:Item"){
+                            console.log(data[index]["dcterms:subject"][0]["@value"])
+                            if(tab.includes(data[index]["dcterms:subject"][0]["@value"])) {
+                                tab.push(data[index]["dcterms:subject"][0]["@value"])
+                            }
+                        }
+                    }
+                    
+                });
+                console.log(tab.length)
+
+            }
+            showSujets()
+
+
+       
+    </script>
+</body>
+</html>
