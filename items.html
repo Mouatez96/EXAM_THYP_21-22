@@ -39,6 +39,14 @@
     <script>
 
             var display = document.getElementById("display")
+            
+            function getData(url) {
+                d3.json(url, function (data) {
+                    return data;
+                });
+            }
+
+            getData("https://polemika.univ-paris8.fr/omk/api/items?item_set_id=2")
 
             function showItems() {
                 var items="";
