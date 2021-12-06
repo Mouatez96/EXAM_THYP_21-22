@@ -26,8 +26,8 @@
             text-align: center;
         }
 
-        img {
-
+        div {
+            margin-top:10px;
         }
     </style>
 </head>
@@ -61,7 +61,7 @@
                     
                 });
             }
-            
+
             showSujets()
 
             function showFilterItems(value) {
@@ -75,7 +75,7 @@
                         //console.log(data);
                         if(data[index]["@type"]=="o:Item"){
                             if(data[index]["dcterms:subject"][0]["@value"] == value) {
-                                items ='<div class="item"><img src="'+data[index]["thumbnail_display_urls"]["large"]+'" alt="" width="170px" height="170px"><div>'+data[index]["dcterms:subject"][0]["@value"]+'</div><div class="id">identifiant : '+data[index]["o:id"]+'</div><div class="title">titre : '+data[index]["o:title"]+'</div>';
+                                items ='<div class="item"><img src="'+data[index]["thumbnail_display_urls"]["large"]+'" alt="" width="170px" height="170px"><div><div class="id">identifiant : '+data[index]["o:id"]+'</div><div class="title">titre : '+data[index]["o:title"]+'</div>';
                                 display.innerHTML+=items
                             }
                             
