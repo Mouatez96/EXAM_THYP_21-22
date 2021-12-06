@@ -1,0 +1,46 @@
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix xsp: <http://www.owl-ontologies.com/2005/08/07/xsp.owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix news: <http://sport-tennis.org/news#> .
+
+
+### ontologie news, il y a comme classes pricipales 
+
+news:journaliste a rdfs:Class ;
+             rdfs:label "journaliste".
+             
+newss:chaine a rdfs:Class ;
+             rdfs:label "chaine".
+             
+news:programme a rdfs:Class ;
+             rdfs:label "programme".
+
+news:spectateur a rdfs:Class ;
+             rdfs:label "spectateur".
+
+### les propriétés de l'ontologie :
+
+
+news:diffuse a rdf:Property ;
+              rdfs:domain news:chaine ;
+              rdfs:range news:programme.
+
+news:presente a rdf:Property ;
+             rdfs:domain news:journaliste ;
+              rdfs:range news:programme.
+
+news:travaille_a a rdf:Property ;
+             rdfs:domain news:journaliste ;
+              rdfs:range news:chaine.
+
+news:presente a rdf:Property ;
+             rdfs:domain news:journaliste ;
+              rdfs:range news:programme.
+
+news:regarde a rdf:Property ;
+             rdfs:domain news:spectateur ;
+             rdfs:range news:programme.
+             
