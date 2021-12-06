@@ -32,45 +32,62 @@
     </style>
 </head>
 <body>
-    <h1>Afficher la liste des items</h1>
-    <div id="display">
-        <select id = "myList" onchange = "favTutorial()" >  
+    <h1>Afficher les items selon les sujets</h1>
+    
+        <select id = "myList" onchange="showFilterItems(this.value);" >  
             <option> Sujets</option>  
-            <option> w3schools </option>  
-            <option> Javatpoint </option>  
-        </select>  
+        </select> 
+         
+    <div id="display">
     </div>
     
     <script src="https://d3js.org/d3.v4.min.js"></script>
     <script>
 
          var select= document.getElementById("myList");
-         var option = document.createElement('option');
-         option.text = "salam";
-         select.add(option);
+         var display = document.getElementById("display");
 
          function showSujets() {
-                var items="";
-                var tab=[];
-                
-                console.log(tab.includes(2))
+                var items="";        
                 var url = "https://polemika.univ-paris8.fr/omk/api/items?item_set_id=2";
                 d3.json(url, function (data) {
                     for(index in data) {
-                        //console.log(data);
                         if(data[index]["@type"]=="o:Item"){
-                            console.log(data[index]["dcterms:subject"][0]["@value"])
-                            if(tab.includes(data[index]["dcterms:subject"][0]["@value"])) {
-                                tab.push(data[index]["dcterms:subject"][0]["@value"])
-                            }
+                            var option = document.createElement('option');
+                            option.text = data[index]["dcterms:subject"][0]["@value"];
+                            select.add(option);
                         }
                     }
                     
                 });
-                console.log(tab.length)
-
             }
+            
             showSujets()
+
+            function showFilterItems(value) {
+                display.innerHTML=""
+                console.log(value)
+                var items="";
+                var url = "https://polemika.univ-paris8.fr/omk/api/items?item_set_id=2";
+
+                d3.json(url, function (data) {
+                    for(index in data) {
+                        //console.log(data);
+                        if(data[index]["@type"]=="o:Item"){
+                            if(data[index]["dcterms:subject"][0]["@value"] == value) {
+                                items ='<div class="item"><img src="'+data[index]["thumbnail_display_urls"]["large"]+'" alt="" width="170px" height="170px"><div>'+data[index]["dcterms:subject"][0]["@value"]+'</div><div class="id">identifiant : '+data[index]["o:id"]+'</div><div class="title">titre : '+data[index]["o:title"]+'</div>';
+                                display.innerHTML+=items
+                            }
+                            
+                        }
+                    }
+                    
+                });
+
+                items=""
+            }
+
+        
 
 
        
